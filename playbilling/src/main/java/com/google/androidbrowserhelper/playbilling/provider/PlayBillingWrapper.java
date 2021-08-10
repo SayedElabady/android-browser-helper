@@ -148,7 +148,8 @@ public class PlayBillingWrapper implements BillingWrapper {
             subUpdateParamsBuilder.setReplaceProrationMode(methodData.prorationMode);
         }
 
-        if (methodData.purchaseToken != null || methodData.prorationMode != null) {
+        if (methodData.purchaseToken != null) {
+            subUpdateParamsBuilder.setOldSkuPurchaseToken(methodData.purchaseToken);
             builder.setSubscriptionUpdateParams(subUpdateParamsBuilder.build());
         }
 
