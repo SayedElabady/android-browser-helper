@@ -16,16 +16,17 @@ package com.google.androidbrowserhelper.playbilling.digitalgoods;
 
 import android.os.Build;
 
+import com.android.billingclient.api.QueryProductDetailsParams.Product;
 import com.google.androidbrowserhelper.playbilling.provider.BillingWrapper;
 import com.google.androidbrowserhelper.playbilling.provider.MockBillingWrapper;
 
+import com.google.common.collect.ImmutableList;
+import java.util.Collections;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.internal.DoNotInstrument;
-
-import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -40,7 +41,7 @@ public class ConnectedBillingWrapperTest {
 
     @Test
     public void delays_getDetailsCall() {
-        mConnectedWrapper.querySkuDetails("type", Collections.singletonList("id1"), null);
+        mConnectedWrapper.queryProductDetails("type", Collections.singletonList("id1"), null);
         assertNull(mInnerBillingWrapper.getQueriedSkuDetails());
 
         mInnerBillingWrapper.triggerConnected();
@@ -70,7 +71,7 @@ public class ConnectedBillingWrapperTest {
         mConnectedWrapper.connect(null);
         mInnerBillingWrapper.triggerConnected();
 
-        mConnectedWrapper.querySkuDetails("type", Collections.singletonList("id1"), null);
+        mConnectedWrapper.queryProductDetails("type", Collections.singletonList("id1"), null);
         assertEquals(mInnerBillingWrapper.getQueriedSkuDetails().get(0), "id1");
     }
 

@@ -16,6 +16,7 @@ package com.google.androidbrowserhelper.playbilling.digitalgoods;
 
 import android.os.Bundle;
 
+import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.SkuDetails;
 
 /**
@@ -79,14 +80,14 @@ public class ItemDetails {
     /**
      * Creates this class from a Play Billing {@link SkuDetails}.
      */
-    public static ItemDetails create(SkuDetails skuDetails) {
+    public static ItemDetails create(ProductDetails skuDetails) {
         return new ItemDetails(
-                skuDetails.getSku(),
+                skuDetails.getProductId(),
                 skuDetails.getTitle(),
                 skuDetails.getDescription(),
-                skuDetails.getPriceCurrencyCode(),
-                toPrice(skuDetails.getPriceAmountMicros()),
-                skuDetails.getType(), skuDetails.getIconUrl(), skuDetails.getSubscriptionPeriod(),
+                skuDetails.getOneTimePurchaseOfferDetails().getPriceCurrencyCode(),
+                toPrice(skuDetails.getOneTimePurchaseOfferDetails().getPriceAmountMicros()),
+                skuDetails.getProductType(), skuDetails.getIconUrl(), skuDetails.getSubscriptionPeriod(),
                 skuDetails.getFreeTrialPeriod(),
                 skuDetails.getIntroductoryPricePeriod(),
                 skuDetails.getPriceCurrencyCode(),
