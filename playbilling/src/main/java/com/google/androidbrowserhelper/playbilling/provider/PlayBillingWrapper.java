@@ -140,10 +140,6 @@ public class PlayBillingWrapper implements BillingWrapper {
         );
         builder.setProductDetailsParamsList(productDetailsParamsList);
 
-        if (methodData.purchaseToken != null) {
-            subUpdateParamsBuilder.setOldPurchaseToken(methodData.purchaseToken);
-        }
-
         if (methodData.prorationMode != null) {
             subUpdateParamsBuilder.setReplaceProrationMode(methodData.prorationMode);
         }
