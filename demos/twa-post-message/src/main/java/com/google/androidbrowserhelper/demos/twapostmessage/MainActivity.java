@@ -55,9 +55,11 @@ public class MainActivity extends LauncherActivity {
           // - Have you set up Digital Asset Links correctly?
           // - Double check what browser you're using.
           Log.d(TAG, "Relationship result: " + result);
-          mValidated = true;
+          mValidated = result;
         }
 
+        // Listens for any navigation happens, we wait until the navigation finishes then we
+        // request post message channel using CustomTabsSession#requestPostMessageChannel(uri)
         @Override
         public void onNavigationEvent(int navigationEvent, @Nullable Bundle extras) {
           if (navigationEvent != NAVIGATION_FINISHED) {
