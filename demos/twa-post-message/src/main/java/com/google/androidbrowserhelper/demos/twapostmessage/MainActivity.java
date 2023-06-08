@@ -19,7 +19,9 @@ public class MainActivity extends LauncherActivity {
   private CustomTabsSession mSession;
 
   private Uri URL = Uri.parse("https://peconn.github.io/starters");
-  private Uri ORIGIN = Uri.parse("https://peconn.github.io");
+  private Uri SOURCE_ORIGIN = Uri.parse("my-app-origin-uri");
+  private Uri TARGET_ORIGIN = Uri.parse("https://peconn.github.io");
+
   private boolean mValidated = false;
 
   private final String TAG = "TWA/CCT-PostMessageDemo";
@@ -59,7 +61,8 @@ public class MainActivity extends LauncherActivity {
         }
 
         // Listens for any navigation happens, we wait until the navigation finishes then we
-        // request post message channel using CustomTabsSession#requestPostMessageChannel(uri)
+        // request post message channel using
+        // CustomTabsSession#requestPostMessageChannel(sourceUri, targetUri, extrasBundle)
         @Override
         public void onNavigationEvent(int navigationEvent, @Nullable Bundle extras) {
           if (navigationEvent != NAVIGATION_FINISHED) {
@@ -72,7 +75,7 @@ public class MainActivity extends LauncherActivity {
 
           // If this fails:
           // - Have you included PostMessageService in your AndroidManifest.xml ?
-          boolean result = mSession.requestPostMessageChannel(ORIGIN);
+          boolean result = mSession.requestPostMessageChannel(SOURCE_ORIGIN, TARGET_ORIGIN, new Bundle());
           Log.d(TAG, "Requested Post Message Channel: " + result);
         }
 
